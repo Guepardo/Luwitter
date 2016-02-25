@@ -1,0 +1,156 @@
+<!DOCTYPE >
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title></title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
+	<!-- Compressed JavaScript --> 
+	<style type="text/css">
+		.container{
+			margin-top:65px;
+		}
+
+
+		.box-style{
+			background-color: white;
+			border: 1px solid rgba(138, 138, 138, 0.76);
+
+		}
+
+		.logo{
+			width: 100px; 
+		}
+
+		.top-bar{
+			background-color: white !important; 
+		}
+
+		.top-bar ul{
+			background-color: white !important; 
+		}
+	</style>
+</head>
+<body>
+	<div class="top-bar">
+		<div class="top-bar-left">
+			<ul class="dropdown menu" data-dropdown-menu>
+			<li class="menu-text"><img src="img/logo.png" class="logo" /></li>
+			</ul>
+		</div>
+		<div class="top-bar-right">
+		</div>
+	</div>
+
+	<!-- Conteiner -->
+	<div class="row container">
+
+		<!-- Cadastro -->
+		<div class="medium-4 columns box-style hide" id="box_cadastrar">
+			<form>
+				<div class="row">
+					<div class="medium-12 columns">
+						<h3>Cadastro</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<label> Login: 
+							<input type="text" placeholder="@Exemplo">
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<label> Password: 
+							<input type="password" >
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<label> Password: 
+							<input type="password" >
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<button type="button" class="button expanded hollow">Cadastrar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+		<!--Login  -->
+		<div class="medium-3 columns box-style">
+			<form data-abide novalidate id="login">
+				<div class="row">
+					<div class="medium-12 columns">
+						<h3>Login</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<label> Login: 
+							<input type="text" name="login" placeholder="@Exemplo" required>
+							<spam class="form-error">É necessário o seu login</spam>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<label> Password: 
+							<input type="password" name="pass" required >
+							<spam class="form-error">É necessária a sua senha</spam>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<button type="submit" class="success button expanded hollow	">Login</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<button type="button" class="button expanded hollow" id="show_cadastrar">Não tenho cadastro</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</body>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.js"></script>
+<script type="text/javascript">
+	$(document).foundation(); 
+
+	$(document).ready(function(){
+		$("#show_cadastrar").click(function(){
+			$("#box_cadastrar").removeClass('hide').fadeIn(2500);  	 
+		}); 
+
+		$("#login").on("formvalid.zf.abide", function(event){
+			var args = $(this).serializeArray(); 
+
+			$.post({
+				url: '/login', 
+				data: args 
+				// method: "POST"
+			}).done(function(data){
+				if(!data.status)
+					alert("error ao autenticar, tente novamente."); 
+				else
+					 window.location.href = '/'; 
+			}).fail(function(){
+				alert("Erro na conexão"); 
+			}); 
+		}).on('submit', function(e){
+			e.preventDefault();
+		}); 
+	}); 
+</script>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE >
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title></title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.css">
+	<link rel="stylesheet" href="css/alertify.css">
+
+	<script type="text/javascript" src="js/alertify.js" ></script>
+	<script type="text/javascript" src="js/ngAlertify.js" ></script>
+
+	<!-- Compressed JavaScript --> 
+	<style type="text/css">
+		.container{
+			margin-top:20px;
+		}
+
+		.avatar-background{
+			height:100px; 
+			background-color: orange; 
+		}
+
+		.avatar-container{
+			width:100%;
+			padding:0;
+			border: 1px solid rgb(202, 202, 202);
+		}
+
+		.top-bar, .top-bar ul {
+			background-color: #FDFDFD;
+		}
+
+		.top-bar{
+			border-bottom:1px solid rgb(202, 202, 202);
+		}
+
+		.trending-topics{
+			margin-top: 30px;
+			border: 1px solid rgb(202, 202, 202);
+		}
+
+		.trending-list{
+			list-style-type: none ;
+		}
+
+		.trending-label{
+			margin: 5px 5px 5px 15px;
+		}
+		.avatar-img{
+			margin: -25px 5px 5px 5px;
+		}
+
+		.spotted-input{
+			border: 1px solid rgb(202, 202, 202);
+			border-radius: 2px 2px 1px 1px;
+			padding: 10px 1px 1px 1px;
+			margin:1px 1px 0 1px !important;
+			background-color:rgba(238, 238, 238, 0.34);
+		}
+
+		.spotted-feed-income{
+			border: 1px solid rgb(202, 202, 202);
+			border-top: 0;
+			border-radius: 2px 2px 1px 1px;
+			padding: 10px 1px 1px 1px;
+			margin: 0 1px 1px 1px !important;
+			background-color:rgba(238, 238, 238, 0.22);
+		}
+
+		.avatar-input{
+			width: 32px !important; 
+			height: 32px !important; 
+			margin-top:3px;
+		}
+		.main-container{
+			margin:1px;
+		}
+		ul.trending-list > li{
+			margin:-5px;
+		}
+
+		.logo{
+			width: 100px; 
+		}
+	</style>
+</head>
+<body>	
+
+	<div  data-sticky-container>
+		<div style="width:100%" class="sticky" data-sticky data-options="marginTop:0;">
+			<nav class="top-bar" data-topbar role="navigation">
+				<div class="top-bar-left">
+					<ul class="dropdown menu" data-dropdown-menu>
+						<li class="menu-text"><img src="img/logo.png" class="logo" /></li>
+						<li><a href="#">Moments</a></li>
+						<li><a href="#">Notificações</a></li>
+						<li><a href="#">Mansagens</a></li>
+					</ul>
+				</div>
+				<div class="top-bar-right">
+					<ul class="menu">
+						<li><input type="search" placeholder="Search"></li>
+						<li><button type="button" class="button hollow">Search</button></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+	<!-- Conteiner -->
+	<div class="row container">
+		<!-- Primeira coluna -->
+		<div class="medium-3 columns">
+			
+			<!-- Avatar info -->
+			<div class="row">
+				<div class="avatar-container radius">
+					<!-- background -->
+					<div class="avatar-background">
+
+					</div>
+
+					<!-- foto and some texts -->
+					<div class="row">
+						<div class="medium-4 columns">
+							<img class="avatar-img radius" src="http://www.gravatar.com/avatar/c<%= id %>?s=100&d=identicon&f=y">
+						</div>
+						<div class="medium-8 columns" style="padding:0">
+							<h6> <%= userName %></h6>
+							<small> <%= login %></small>
+						</div>
+					</div>
+
+					<!-- friends, fallowers and Sppoteds -->
+					<div class="row">
+						<!-- Sppotted -->
+						<div class="medium-4 columns">
+							<h6>Twittes</h6>
+							<small><%= numLuwittes %></small>
+						</div>
+						<!-- Followers -->
+						<div class="medium-4 columns">
+							<h6>Follow</h6>
+							<small> <%= numFollows %></small>
+						</div>
+						<!-- Friends -->
+						<div class="medium-4 columns">
+							<h6>Friends</h6>
+							<small><%= numFriends %></small>
+						</div>
+					</div>
+				</div> 
+			</div>
+
+			<!-- Trending topics -->
+			<div class="row radius trending-topics">
+				<!-- Label -->
+				<div class="row">
+					<div class="medium-12 columns">
+						<h5 class="trending-label">Trending Topics</h5>
+					</div>
+				</div>
+
+				<!-- Trending topics list -->
+				<div class="row">
+					<div class="medium-12 columns">
+						<ul class="trending-list">
+							<li><a href="">#nadas</a></li>
+							<li><a href="">#nadas</a></li>
+							<li><a href="">#nadas</a></li>
+							<li><a href="">#nadas</a></li>
+							<li><a href="">#nadas</a></li>
+							<li><a href="">#nadas</a></li>
+							<li><a href="">#nadas</a></li>
+							<li><a href="">#nadas</a></li>
+							<li><a href="">#nadas</a></li>
+							<li><a href="">#nadas</a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<!-- Segunda coluna -->
+		<div class="medium-6 columns">
+			<!-- input spotted -->
+			<div class="row spotted-input">
+				<!-- avatar image -->
+				<div class="row">
+					<div class="medium-2 columns">
+						<img class="radius avatar-input"  src="http://www.gravatar.com/avatar/c<%= id %>?s=32&d=identicon&f=y">
+					</div>
+
+					<!-- input -->
+					<div class="medium-10 columns" style="padding-left:0">
+						<input id="input_post" type="text" placeholder="O que está pegando?" />
+
+					<!-- <div class="row">
+						<label>link de uma imagem:
+							<input type="text" id="input_link" placeholder="www.google.com/gatos.png" />
+						</label>
+					</div>
+
+					<div class="row">
+						<label>link de uma imagem:
+							<button type="button" class="button success hollow expanded">Luwittar!</button>
+						</label>
+					</div> -->
+				</div>
+			</div>
+
+			<div id="exceded_form" class="row hide" style="margin:1px 1px 0 1px">
+				<div class="row">
+					<div class="medium-12 columns">
+						<label>link de uma imagem:
+							<input type="text" placeholder="www.google.com/gatos.png">
+						</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="medium-12 columns">
+						<button type="button" class="button success hollow expanded">Luwittar!</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- spotteds income -->
+		<div class="row spotted-feed-income ">
+			<p class="text-center">Ver 200 novos Twittes</p>
+		</div>
+
+		<!-- spotteds -->
+		<div class="row">
+			
+		</div>
+	</div>
+	<!-- Terceira coluna -->
+
+	<div class="medium-3 columns">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</div>
+</div>
+
+</body>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.js"></script>
+<script type="text/javascript">
+	$(document).foundation(); 
+
+	$(document).ready(function(){
+		alertify.log("Olá, você está autenticado no sistema.");
+
+		setTimeout(function(){
+			alertify.log("Nada ainda está funcionando"); 
+		},1000); 
+
+
+
+		$('.spotted-input').focusin(function(){
+			$("#exceded_form").removeClass('hide'); 
+		}).focusout(function(){
+			$("#exceded_form").addClass('hide'); 
+		}); 
+	}); 
+</script>
+</html>
