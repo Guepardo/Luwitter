@@ -11,24 +11,22 @@ route.get('/login',function(req, res, next){
 // Route to register an user.
 route.post('/login/register', function(req, res, next){
 	var login    = req.body.login;
-	var userName = req.body.userName;
-	var pass1    = req.body.password1;
-	var pass2    = req.body.password2;
+	var pass1    = req.body.pass;
+	var pass2    = req.body.pass2;
 
 	if(pass1 != pass2)
 		res.json({status: false, msg : 'senhas diferentes'});
 
 	var client = new  Client({
 		login : login,
-		userName: userName, 
 		password: pass1
 	});
 
 	client.save(function(error, object){
-		if(error) res.json({
-			status: false,
-			msg : error//That's not the correct form to do it.
-		});
+		if(error){
+			res.json({ status: false, msg : error });
+			return;
+		}
 			res.json({status: true});
 		});
 });

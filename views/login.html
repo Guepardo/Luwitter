@@ -48,7 +48,7 @@
 
 		<!-- Cadastro -->
 		<div class="medium-4 columns box-style hide" id="box_cadastrar">
-			<form>
+			<form data-abide novalidate id="cadastro">
 				<div class="row">
 					<div class="medium-12 columns">
 						<h3>Cadastro</h3>
@@ -57,27 +57,30 @@
 				<div class="row">
 					<div class="medium-12 columns">
 						<label> Login: 
-							<input type="text" placeholder="@Exemplo">
+							<input type="text" placeholder="Exemplo (Sem espaços)" name="login" required>
+							<spam class="form-error">Preencha este campo</spam>
 						</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="medium-12 columns">
 						<label> Password: 
-							<input type="password" >
+							<input type="password" name="pass" required>
+							<spam class="form-error">Preencha este campo</spam>
 						</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="medium-12 columns">
-						<label> Password: 
-							<input type="password" >
+						<label> Password: <small>Validação</small>
+							<input type="password" name="pass2" required>
+							<spam class="form-error">Preencha este campo</spam>
 						</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="medium-12 columns">
-						<button type="button" class="button expanded hollow">Cadastrar</button>
+						<button type="submit" class="button expanded hollow">Cadastrar</button>
 					</div>
 				</div>
 			</form>
@@ -145,6 +148,26 @@
 					alert("error ao autenticar, tente novamente."); 
 				else
 					 window.location.href = '/'; 
+			}).fail(function(){
+				alert("Erro na conexão"); 
+			}); 
+		}).on('submit', function(e){
+			e.preventDefault();
+		}); 
+
+
+		$("#cadastro").on("formvalid.zf.abide", function(event){
+			var args = $(this).serializeArray(); 
+
+			$.post({
+				url: '/login/register', 
+				data: args 
+				// method: "POST"
+			}).done(function(data){
+				if(!data.status)
+					alert("error ao cadastrar, tente novamente."); 
+				else
+					alert("Cadastrado com sucesso"); 
 			}).fail(function(){
 				alert("Erro na conexão"); 
 			}); 

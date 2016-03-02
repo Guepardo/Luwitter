@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var clientSchema = mongoose.Schema({
 	login:    { type: String, required: true, unique: true},
-	userName: { type: String, required: true}, 
+	userName: { type: String}, 
 	password: { type: String, required: true}
 });
 

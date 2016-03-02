@@ -23,4 +23,21 @@ route.post('/luwitte',function(req, res, next){
 	}); 
 }); 
 
+
+route.post('/feed',function(req, res, next){
+	var date = req.body.date; 
+
+	Luwitte.find({
+		post_date : { $lt : date}
+	}).
+	limit(10).
+	populate({ path: 'client_id', select: '_id login'}).
+	exec(function(error, objects){
+		if(error)
+			res.json({status: false}); 
+
+		res.json(objects); 
+	}); 
+}); 
+
 module.exports = route; 
