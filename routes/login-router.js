@@ -13,13 +13,15 @@ route.post('/login/register', function(req, res, next){
 	var login    = req.body.login;
 	var pass1    = req.body.pass;
 	var pass2    = req.body.pass2;
+	var userName = req.body.userName; 
 
 	if(pass1 != pass2)
 		res.json({status: false, msg : 'senhas diferentes'});
 
 	var client = new  Client({
 		login : login,
-		password: pass1
+		password: pass1, 
+		userName: userName
 	});
 
 	client.save(function(error, object){

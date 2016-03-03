@@ -41,10 +41,19 @@
 			border: 1px solid rgb(202, 202, 202);
 		}
 
+		.info-box{
+			border: 1px solid rgb(202, 202, 202);
+		}
+
 		.trending-list{
 			list-style-type: none ;
 		}
 
+		#input{
+			display: inline-block;
+			width: 95%;
+		}
+		
 		.trending-label{
 			margin: 5px 5px 5px 15px;
 		}
@@ -70,6 +79,9 @@
 
 		.item{
 			margin-top: 16px;	
+		}
+		.item:hover{
+			background-color:rgba(238, 238, 238, 0.94);
 		}
 		.spotted-feed-income{
 			border: 1px solid rgb(202, 202, 202);
@@ -156,7 +168,7 @@
 					<div class="row">
 						<!-- Sppotted -->
 						<div class="medium-4 columns">
-							<h6>Twittes</h6>
+							<h6>Luwittes</h6>
 							<small><%= numLuwittes %></small>
 						</div>
 						<!-- Followers -->
@@ -215,8 +227,8 @@
 					</div>
 
 					<!-- input -->
-					<div class="medium-10 columns" style="padding-left:0">
-						<input id="input_post" type="text" placeholder="O que está pegando?" />
+					<div id="input_post" class="medium-10 columns" style="padding-left:0">
+						<input id="input" type="text" placeholder="O que está pegando?" />
 
 					<!-- <div class="row">
 						<label>link de uma imagem:
@@ -235,15 +247,15 @@
 			<div id="exceded_form" class="row hide" style="margin:1px 1px 0 1px">
 				<div class="row">
 					<div class="medium-12 columns">
-						<label>link de uma imagem:
-							<input type="text" placeholder="www.google.com/gatos.png">
+						<label>Link de uma imagem:
+							<input id="link" type="text" placeholder="www.google.com/gatos.png">
 						</label>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="medium-12 columns">
-						<button type="button" class="button success hollow expanded">Luwittar!</button>
+						<button id="buttom_luwitter" type="button" class="button  pull-right">Luwittar!</button>
 					</div>
 				</div>
 			</div>
@@ -251,116 +263,30 @@
 		</div>
 
 		<!-- spotteds income -->
-		<div class="row spotted-feed-income ">
+		<div class="row spotted-feed-income hide">
 			<p class="text-center">Ver 200 novos Twittes</p>
 		</div>
 
 		<!-- spotteds -->
 		<div id="luwitte_content" class="row spotted-item">
 			<!-- item begin -->
-			<div class="row item">
-				<div class="medium-2 columns" style="padding-right: 0;">
-					<img class="avatar-luwitte" src="http://lorempixel.com/g/48/48/">
-				</div>
+			
 
-				<div class="medium-10 columns" style="padding-left: 0;">
-					<!-- row 1 -->
-					<div class="row">
-						<div class="medium-12 columns">
-							<h6>Allyson <small>@allyson - Wed Feb 24 2016 22:46:05 </small></h6>
-						</div>	
-					</div>	
-
-					<!-- row 2 -->
-					<div class="row">
-						<div class="medium-12 columns">
-							<p style="font-size:15px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua.</p>
-							</div>	
-						</div>	
-
-						<!-- row 3 -->
-						<div class="row">
-							<div class="medium-12 columns">
-
-							</div>	
-						</div>	
-
-						<!-- row 4 -->
-						<div class="row">
-							<div class="medium-12 columns">
-								<i class="fa fa-heartbeat like-style"> 434</i>
-							</div>	
-						</div>	
-					</div>
-				</div>
-				<!-- item end -->
-
-				<!-- item begin -->
-				<div class="row item">
-					<div class="medium-2 columns" style="padding-right: 0;">
-						<img class="avatar-luwitte" src="http://lorempixel.com/g/48/48/">
-					</div>
-
-					<div class="medium-10 columns" style="padding-left: 0;">
-						<!-- row 1 -->
-						<div class="row">
-							<div class="medium-12 columns">
-								<h6>Allyson <small>@allyson - Wed Feb 24 2016 22:46:05 </small></h6>
+			
+			<!-- item end -->
 
 
-							<!-- <div class="row">
-								<div class="medium-2 columns">
-									<h6>Allyson</h6>
-								</div>
-								<div class="medium-5 columns end">
-									<small>@allyson - 11:70pm</small>
-								</div>
-							</div> -->
-						</div>	
-					</div>	
-
-					<!-- row 2 -->
-					<div class="row">
-						<div class="medium-12 columns">
-							<p style="font-size:15px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							</div>	
-						</div>	
-
-						<!-- row 3 -->
-						<div class="row">
-							<div class="medium-12 columns">
-								<img class="landspace-img" src="https://pbs.twimg.com/media/Cb6umgfXIAExRpG.jpg">
-							</div>	
-						</div>	
-
-						<!-- row 4 -->
-						<div class="row">
-							<div class="medium-12 columns">
-								<i class="fa fa-heartbeat like-style"> 434</i>
-							</div>	
-						</div>	
-					</div>
-				</div>
-				<!-- item end -->
-
-				
-			</div>
 		</div>
-		<!-- Terceira coluna -->
+	</div>
+	<!-- Terceira coluna -->
 
-		<div class="medium-3 columns">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	<div class="medium-3 columns info-box">
+		<p style="text-align: justify; font-size:15px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 		</div>
 	</div>
 
@@ -371,58 +297,85 @@
 	$(document).foundation(); 
 
 	$(document).ready(function(){
+		var login = '<%= login %>'; 
+		var userName = '<%= userName %>';
+
 		$('#input_post').focusin(function(){
 			$("#exceded_form").removeClass('hide'); 
-		}).focusout(function(){
+		})
+
+		$('#exceded_form').focusout(function(){
 			$("#exceded_form").addClass('hide'); 
 		}); 
 
+		$("#buttom_luwitter").click(function(){
+			var link = $("#link").val(); 
+			var text = $("#input").val(); 
+
+			$.post('/luwitte',{
+				post: text, 
+				link: link
+			}).done(function(data){
+				if(!data.status)	
+					alert("Error"); 
+				else
+					alert("Sucesso."); 
+			}); 
+		}); 
 
 		//Scrooll infinito: 
 		var lastDate = new Date(); 
-		var controll = false; 
+		var control = false; 
 		
 
+		$(window).scroll(function () {
+			var posicaoAtual = $(window).scrollTop();
+			var documentSize = $(document).height();
+			var sizeWindow   = $(window).height();
+			posicaoAtual = $(window).scrollTop();
+			if ( posicaoAtual >= (documentSize - sizeWindow )  && !control) {
+				control = true; 
+				request(); 
+			}
+		});
+		
 
-	$(window).scroll(function () {
-		var posicaoAtual = $(window).scrollTop();
-		var documentSize = $(document).height();
-		var sizeWindow   = $(window).height();
-		posicaoAtual = $(window).scrollTop();
-		if ( posicaoAtual >= (documentSize - sizeWindow )  && !controll) {
-			controll = true; 
+		function request(){
 			$.post('/feed',
 				{ date : lastDate}
 				).done(function(data){ 
 					luwitteBiulder(data); 
-					controll = false;
+					control = false;
 				}); 
 			}
-		});
-		
+			request(); 
 
 		//Luwitte build: 
 		function luwitteBiulder(itens){
 			for(id in itens){
 				var temp = itens[id]; 
-				$('#luwitte_content').last().append(templatePopulate(temp.client_id.login,
+				$('#luwitte_content').last().append(templatePopulate(
+					temp.client_id.userName,
+					temp.client_id.login,
 					temp.post_date,
 					temp.text,
 					0,
-					0,
+					temp.link,
 					temp.client_id._id
 					)); 
 			}
+
+			lastDate = itens[itens.length -1].post_date; 
 		}
 
-		function templatePopulate(login, date, text, numLove, link, id){
+		function templatePopulate(userName,login, date, text, numLove, link, id){
 			var template = '<div class="row item">';
 			template += '<div class="medium-2 columns" style="padding-right: 0;">';
 			template +=	'<img class="avatar-luwitte" src="http://www.gravatar.com/avatar/c'+id+'?s=48&d=identicon&f=y"></div>';
 			template += '<div class="medium-10 columns" style="padding-left: 0;">';
 			template +=	'<div class="row">';
 			template +=	'	<div class="medium-12 columns">';
-			template +=	'		<h6>'+login+' <small>@'+login+' - '+date+'</small></h6>';
+			template +=	'		<h6>'+userName+' <small>'+login+' - '+date+'</small></h6>';
 			template +=	'</div>';
 			template +='</div>';
 			template +=	'<div class="row">';
@@ -432,6 +385,8 @@
 			template +=	'	</div>';
 			template +=	'	<div class="row">';
 			template +=	'		<div class="medium-12 columns">';
+			if( link != "")
+				template +=	'<img class="landspace-img" src="'+link+'">';
 			template +=	'		</div>';
 			template +=	'	</div>';
 			template +=	'	<div class="row">';
@@ -441,6 +396,8 @@
 			template +=	'	</div>';
 			template +=	'</div>';
 			template +='</div>';
+
+			
 
 			return template; 
 		}
