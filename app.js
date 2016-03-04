@@ -3,6 +3,7 @@ var path       = require("path");
 var http       = require("http");
 var session    = require("express-session");
 var bodyParser = require("body-parser");
+var serverSocket = require("./modules/serverSocket"); 
 var app = express();
 
 require('./mongo/db')();
@@ -28,3 +29,4 @@ var port = process.env.PORT || 3000;
 app.set('port', port);
 var server = http.createServer(app);
 server.listen(port);
+serverSocket.init(server); 

@@ -263,8 +263,8 @@
 		</div>
 
 		<!-- spotteds income -->
-		<div class="row spotted-feed-income hide">
-			<p class="text-center">Ver 200 novos Twittes</p>
+		<div class="row spotted-feed-income hide" id="income_box">
+			<p class="text-center" id="income_text">Ver 200 novos Twittes</p>
 		</div>
 
 		<!-- spotteds -->
@@ -293,12 +293,25 @@
 </body>
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+
+
 <script type="text/javascript">
 	$(document).foundation(); 
 
 	$(document).ready(function(){
-		var login = '<%= login %>'; 
+		var socket = io.connect(window.location.origin);
+
+		var login    = '<%= login %>'; 
 		var userName = '<%= userName %>';
+
+		var incomeLuwitteCount = 0; 
+		socket.on('new_luwitte',function(){ 
+			$('#income_box').removeClass("hide").hide().fadeIn(500); 
+
+			var text  = (++incomeLuwitteCount > 1)? "Ver " + incomeLuwitteCount +" novos Twittes" : "Ver " + incomeLuwitteCount +" novo Luwitte";  
+			$('#income_text').text(text); 
+		}); 
 
 		$('#input_post').focusin(function(){
 			$("#exceded_form").removeClass('hide'); 
@@ -318,8 +331,10 @@
 			}).done(function(data){
 				if(!data.status)	
 					alert("Error"); 
-				else
+				else{
 					alert("Sucesso."); 
+					socket.emit('new_luwitte'); 
+				}
 			}); 
 		}); 
 
@@ -385,8 +400,7 @@
 			template +=	'	</div>';
 			template +=	'	<div class="row">';
 			template +=	'		<div class="medium-12 columns">';
-			if( link != "")
-				template +=	'<img class="landspace-img" src="'+link+'">';
+			if( link != "") template +=	'<img class="landspace-img" src="'+link+'">';
 			template +=	'		</div>';
 			template +=	'	</div>';
 			template +=	'	<div class="row">';
@@ -395,9 +409,7 @@
 			template +=	'		</div>';
 			template +=	'	</div>';
 			template +=	'</div>';
-			template +='</div>';
-
-			
+			template +='</div>'; 
 
 			return template; 
 		}
