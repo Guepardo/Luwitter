@@ -92,6 +92,10 @@
 			background-color:rgba(238, 238, 238, 0.22);
 		}
 
+		.spotted-feed-income:hover{
+			background-color:rgba(216, 212, 212, 0.52);
+		}
+
 		.landspace-img{
 			width: 470px;
 			height: 230px;
@@ -293,6 +297,7 @@
 </body>
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/foundation/6.1.2/foundation.min.js"></script>
+<script src="https://cdn.rawgit.com/alertifyjs/alertify.js/v1.0.10/dist/js/alertify.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 
 
@@ -322,6 +327,16 @@
 		}); 
 
 		$("#buttom_luwitter").click(function(){
+			sendMsg(); 
+		}); 
+
+		$("#input").keypress(function(e) {
+			if(e.which == 13) {
+				sendMsg(); 
+			}
+		});
+
+		function sendMsg(){
 			var link = $("#link").val(); 
 			var text = $("#input").val(); 
 
@@ -332,10 +347,19 @@
 				if(!data.status)	
 					alert("Error"); 
 				else{
-					alert("Sucesso."); 
+					$("#input").val(""); 
+					alertify.success("Enviado."); 
 					socket.emit('new_luwitte'); 
+					request("gt"); 
+
 				}
 			}); 
+		}
+
+		$(".spotted-feed-income").click(function(){
+			request("gt"); 
+			$('#income_box').hide().fadeOut(500);
+			incomeLuwitteCount = 0;
 		}); 
 
 		//Scrooll infinito: 
@@ -350,26 +374,35 @@
 			posicaoAtual = $(window).scrollTop();
 			if ( posicaoAtual >= (documentSize - sizeWindow )  && !control) {
 				control = true; 
-				request(); 
+				request("lt"); 
 			}
 		});
 		
 
-		function request(){
+		function request(mode){
+			var lastDateTemp; 
+			if(mode == "gt")
+				lastDateTemp = $("i.date").first().data("date"); 
+			else
+				lastDateTemp = lastDate; 
+
 			$.post('/feed',
-				{ date : lastDate}
+				{ date : lastDateTemp,
+					mode : mode
+				}
 				).done(function(data){ 
-					luwitteBiulder(data); 
+					luwitteBiulder(data,mode); 
+					reduceDate(); 
 					control = false;
 				}); 
 			}
-			request(); 
+			request("lt"); 
 
 		//Luwitte build: 
-		function luwitteBiulder(itens){
+		function luwitteBiulder(itens,mode){
 			for(id in itens){
 				var temp = itens[id]; 
-				$('#luwitte_content').last().append(templatePopulate(
+				var temp_luwitte = templatePopulate(
 					temp.client_id.userName,
 					temp.client_id.login,
 					temp.post_date,
@@ -377,7 +410,12 @@
 					0,
 					temp.link,
 					temp.client_id._id
-					)); 
+					); 
+
+				if(mode == "lt")
+					$('#luwitte_content').last().append(temp_luwitte); 
+				else
+					$('#luwitte_content').first().prepend(temp_luwitte); 
 			}
 
 			lastDate = itens[itens.length -1].post_date; 
@@ -390,7 +428,7 @@
 			template += '<div class="medium-10 columns" style="padding-left: 0;">';
 			template +=	'<div class="row">';
 			template +=	'	<div class="medium-12 columns">';
-			template +=	'		<h6>'+userName+' <small>'+login+' - '+date+'</small></h6>';
+			template +=	'		<h6>'+userName+' <small>'+login+' - <i data-date="'+date+'"class="date"></i></small></h6>';
 			template +=	'</div>';
 			template +='</div>';
 			template +=	'<div class="row">';
@@ -413,6 +451,39 @@
 
 			return template; 
 		}
+
+		setInterval(function(){
+			reduceDate(); 
+		},3000); 
+
+		function reduceDate(){
+			var arrayDate = $("i.date"); 
+
+			var dateNow = new Date(); 
+			for(var x = 0; x < arrayDate.length; x++){
+				dateTemp = new Date($(arrayDate[x]).data("date")); 
+				$(arrayDate[x]).text(diff(dateTemp,dateNow)); 
+			}
+			
+		}
+
+		function diff(d1, d2){
+			var result = "agora"; 
+
+			var temp = d2 - d1; 
+			if( Math.floor( temp / 1000) < 0 )
+				return "agora"; 
+			if( Math.floor( temp / 1000) > 0 )
+				result = Math.floor( temp / 1000)+" segundos atrás"; 
+			if( Math.floor( temp / (1000 * 60) ) > 0 )
+				result = Math.floor( temp / (1000 * 60) )+" minutos atrás"; 
+			if( Math.floor( temp / ((1000 * 60)* 60) ) > 0 )
+				result = Math.floor( temp / ((1000 * 60)* 60))+" horas atrás"; 
+			if( Math.floor( temp / (((1000 * 60)* 60)*24) ) > 0 )
+				result = Math.floor( temp / (((1000 * 60)* 60)*24) )+" dias atrás"; 
+			return result;  
+		}
+
 	}); 
 </script>
 </html>

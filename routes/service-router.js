@@ -8,7 +8,7 @@ route.post('/luwitte',function(req, res, next){
 
 	var session = req.session;
 
-    console.log(session); 
+	console.log(session); 
 	var luwitte = new Luwitte({
 		text: post,
 		link: link,
@@ -29,21 +29,47 @@ route.post('/luwitte',function(req, res, next){
 
 route.post('/feed',function(req, res, next){
 	var date = req.body.date; 
+	var mode = req.body.mode; 
+	//mode: 
+	//lt = less than
+	//gt = greater than
+	
+	if( mode != "lt" && mode != "gt" )
+		res.json({status: false}); 
+	if( mode == "lt" ){
+		Luwitte.find({
+			post_date : { $lt : new Date(date) }
+		}).
+		limit(10).
+		populate({ path: 'client_id', select: '_id login userName'}).
+		sort({post_date : -1 }).
+		exec(function(error, objects){
+			if(error){
+				res.json({status: false}); 
+				return;
+			}
 
-	Luwitte.find({
-		post_date : { $lt : new Date(date) }
-	}).
-	limit(10).
-	populate({ path: 'client_id', select: '_id login userName'}).
-	sort({post_date : -1 }).
-	exec(function(error, objects){
-		if(error){
-			res.json({status: false}); 
-			return;
-		}
+			res.json(objects); 
+		});
+	}
 
-		res.json(objects); 
-	}); 
+	if( mode == "gt" ){
+		Luwitte.find({
+			post_date : { $gt : new Date(date) }
+		}).
+		limit(10).
+		populate({ path: 'client_id', select: '_id login userName'}).
+		sort({post_date : 1 }).
+		exec(function(error, objects){
+			if(error){
+				res.json({status: false}); 
+				return;
+			}
+
+			res.json(objects); 
+		});
+	}
+
 }); 
 
 module.exports = route; 
